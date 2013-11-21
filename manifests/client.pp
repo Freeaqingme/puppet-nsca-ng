@@ -14,7 +14,7 @@ class nsca_ng::client (
   }
 
   exec { 'nsca-ng_download-pkg':
-    command => "wget http://www.nsca-ng.org/download/debian/nsca-ng-client_${version}_${::archictecture}.deb",
+    command => "wget http://www.nsca-ng.org/download/debian/nsca-ng-client_${version}_${::architecture}.deb",
     cwd     => '/var/lib/puppet',
     creates => "/var/lib/puppet/nsca-ng-client_${version}_${::architecture}.deb",
   }
