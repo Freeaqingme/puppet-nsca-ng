@@ -157,12 +157,7 @@ class nsca_ng (
   #######################################
 
   # Package
-  exec { 'ncsa-ng_download-dpkg-pkg':
-    command => "
-      wget http://www.ncsa-ng.org/download/nsca-ng-${version}
-    }
-    "
-  }
+
   
   package { $standard::package:
     ensure  => $standard::manage_package,
