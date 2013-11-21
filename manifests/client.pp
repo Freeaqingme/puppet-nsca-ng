@@ -22,7 +22,7 @@ class nsca_ng::client (
   package { 'nsca-ng-client':
     ensure   => latest,
     provider => dpkg,
-    source   => "/var/lib/puppet/nsca-ng-client_${version}_${::archictecture}.deb",
+    source   => "/var/lib/puppet/nsca-ng-client_${version}~upstream1_${::archictecture}.deb",
     require  => Exec['nsca-ng_download-pkg']
   }
 
