@@ -67,7 +67,7 @@
 #   Basically you can run a dryrun for this specific module if you set
 #   this to true. Default: false
 #
-class standard (
+class nsca_ng (
   $my_class            = '',
   $source              = '',
   $source_dir          = '',
@@ -75,7 +75,7 @@ class standard (
   $template            = '',
   $service_autorestart = false,
   $options             = '',
-  $version             = 'present',
+  $version             = 1.2,
   $absent              = false,
   $disable             = false,
   $disableboot         = false,
@@ -157,6 +157,13 @@ class standard (
   #######################################
 
   # Package
+  exec { 'ncsa-ng_download-dpkg-pkg':
+    command => "
+      wget http://www.ncsa-ng.org/download/nsca-ng-${version}
+    }
+    "
+  }
+  
   package { $standard::package:
     ensure  => $standard::manage_package,
     noop    => $standard::noops,
