@@ -1,6 +1,8 @@
 class nsca_ng::client (
-  $version  = 1.2,
-  $firewall = params_lookup( 'firewall', 'global' )
+  $version     = 1.2,
+  $firewall    = params_lookup( 'firewall', 'global' ),
+  $bin_file    = '/usr/sbin/send_nsca',
+  $config_file = '/etc/send_nsca.cfg'
 ) {
 
   if $firewall {
@@ -17,8 +19,10 @@ class nsca_ng::client (
     command => "wget http://www.nsca-ng.org/download/debian/nsca-ng-client_${version}~upstream1_${::architecture}.deb",
     cwd     => '/var/lib/puppet',
     creates => "/var/lib/puppet/nsca-ng-client_${version}~upstream1_${::architecture}.deb",
+    before  => Package[ 'nsca-ng-client' ]
   }
 
+  # For now, debian only
   package { 'nsca-ng-client':
     ensure   => latest,
     provider => dpkg,
