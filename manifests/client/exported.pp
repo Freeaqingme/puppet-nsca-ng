@@ -1,5 +1,5 @@
 
-class nsca_ng::client::exported (
+define nsca_ng::client::exported (
   $identity,
   $password,
   $services = '',
