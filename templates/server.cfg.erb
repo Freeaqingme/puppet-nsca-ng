@@ -35,7 +35,7 @@ chroot           = <%= @chroot -%>
 # Other files can be included.  If a directory is specified, all "*.cfg" and
 # "*.conf" files within this directory and all subdirectories are included.
 #
-include(nsca-ng.d/*.cfg)
+include("/etc/nsca-ng.d/")
 
 #
 # Clients provide a client ID (think: user name) and a password.  The same

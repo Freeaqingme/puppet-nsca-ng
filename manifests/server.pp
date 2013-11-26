@@ -50,21 +50,23 @@
 #   class where a selection is made based on OS.
 #
 class nsca_ng::server (
-  $listen         = '*',
-  $temp_dir       = '/tmp',
-  $chroot         = '',
-  $user           = 'nagios',
-  $max_cmd_size   = 16384,
-  $max_queue_size = 1024,
-  $log_level      = 3,
-  $timeout        = 60,
-  $command_file   = '/var/lib/nagios3/rw/nagios.cmd',
-  $tls_ciphers    = [ 'PSK-AES256-CBC-SHA' ],
-  $port           = 5668,
-  $version        = 1.2,
-  $firewall       = params_lookup( 'firewall', 'global' ),
-  $config_file    = '/etc/nsca-ng.cfg',
-  $template       = 'nsca_ng/server.cfg.erb',  
+  $listen            = '*',
+  $temp_dir          = '/tmp',
+  $chroot            = '',
+  $user              = 'nagios',
+  $max_cmd_size      = 16384,
+  $max_queue_size    = 1024,
+  $log_level         = 3,
+  $timeout           = 60,
+  $command_file      = '/var/lib/nagios3/rw/nagios.cmd',
+  $tls_ciphers       = [ 'PSK-AES256-CBC-SHA' ],
+  $port              = 5668,
+  $version           = 1.2,
+  $firewall          = params_lookup( 'firewall', 'global' ),
+  $config_file       = '/etc/nsca-ng.cfg',
+  $template          = 'nsca_ng/server.cfg.erb',
+  $config_file_owner = 'nagios',
+  $config_file_group = 'nagios',
 ) {
 
   if $firewall {
@@ -99,7 +101,7 @@ class nsca_ng::server (
     source   => "/var/lib/puppet/nsca-ng-server_${version}~upstream1_${::architecture}.deb",
     require  => Exec['nsca-ng_download-pkg']
   }
-  
+
   file { '/etc/nsca-ng.d':
     ensure => directory,
     owner  => root,
@@ -115,8 +117,12 @@ class nsca_ng::server (
   file { "${nsca_ng::server::config_file}":
     content => template($::nsca_ng::server::template),
     mode    => 0600,
-    owner   => 'nagios',
-    group   => 'nagios',
+    owner   => $config_file_owner,
+    group   => $config_file_group,
+    notify  => Service[ 'nsca-ng-server' ],
     require => Package[ 'nsca-ng-server' ]
   }
+
+  Nsca_ng::Client::Exported <<||>>
+
 }

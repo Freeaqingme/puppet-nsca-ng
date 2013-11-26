@@ -108,4 +108,9 @@ class nsca_ng::client (
     group   => 'nagios',
     require => Package[ 'nsca-ng-client' ]
   }
+
+  @@nsca_ng::client::exported { $::fqdn:
+    identity => $::fqdn,
+    password => $password,
+  }
 }

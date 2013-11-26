@@ -1,0 +1,14 @@
+# File managed by Puppet
+
+authorize "<%= @identity %>" {
+    password = "<%= @password %>"
+
+<% if @services != '' %>
+    services = { "<%= @services.join('", "') %>" }
+<% end %>
+
+<% if @hosts != '' %>
+    hosts = { "<%= @hosts.join('", "') %>" }
+<% end %>
+
+}
