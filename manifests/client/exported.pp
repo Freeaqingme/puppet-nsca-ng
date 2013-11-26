@@ -2,8 +2,8 @@
 class nsca_ng::client::exported (
   $identity,
   $password,
-  $services,
-  $hosts,
+  $services = '',
+  $hosts    = '',
   $auth_template = 'nsca_ng/authorization.cfg'
 ) {
 

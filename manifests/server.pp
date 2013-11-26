@@ -123,6 +123,7 @@ class nsca_ng::server (
     require => Package[ 'nsca-ng-server' ]
   }
 
-  Nsca_ng::Client::Exported <<||>>
+  Nsca_ng::Client::Exported <<| |>>
 
 }
+
