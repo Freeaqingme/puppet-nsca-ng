@@ -116,7 +116,7 @@ class nsca_ng::server (
     require => Package['nsca-ng-server']
   }
 
-  file { "${nsca_ng::server::config_file}.cfg":
+  file { "${nsca_ng::server::config_file}":
     content => template($::nsca_ng::server::template),
     mode    => 0600,
     owner   => $config_file_owner,
