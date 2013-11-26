@@ -103,10 +103,12 @@ class nsca_ng::server (
   }
 
   file { '/etc/nsca-ng.d':
-    ensure => directory,
-    owner  => root,
-    group  => root,
-    mode   => 0700,
+    ensure  => directory,
+    owner   => root,
+    group   => root,
+    mode    => 0700,
+    recurse => true,
+    purge   => true
   }
 
   service { 'nsca-ng-server':
