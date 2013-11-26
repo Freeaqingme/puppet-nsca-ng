@@ -50,23 +50,25 @@
 #   class where a selection is made based on OS.
 #
 class nsca_ng::server (
-  $listen            = '*',
-  $temp_dir          = '/tmp',
-  $chroot            = '',
-  $user              = 'nagios',
-  $max_cmd_size      = 16384,
-  $max_queue_size    = 1024,
-  $log_level         = 3,
-  $timeout           = 60,
-  $command_file      = '/var/lib/icinga/rw/icinga.cmd',
-  $tls_ciphers       = [ 'PSK-AES256-CBC-SHA' ],
-  $port              = 5668,
-  $version           = 1.2,
-  $firewall          = params_lookup( 'firewall', 'global' ),
-  $config_file       = '/etc/nsca-ng.cfg',
-  $template          = 'nsca_ng/server.cfg.erb',
-  $config_file_owner = 'nagios',
-  $config_file_group = 'nagios',
+  $listen             = '*',
+  $temp_dir           = '/tmp',
+  $chroot             = '',
+  $user               = 'nagios',
+  $max_cmd_size       = 16384,
+  $max_queue_size     = 1024,
+  $log_level          = 3,
+  $timeout            = 60,
+  $command_file       = '/var/lib/icinga/rw/icinga.cmd',
+  $tls_ciphers        = [ 'PSK-AES256-CBC-SHA' ],
+  $port               = 5668,
+  $version            = 1.2,
+  $firewall           = params_lookup( 'firewall', 'global' ),
+  $config_file        = '/etc/nsca-ng.cfg',
+  $template           = 'nsca_ng/server.cfg.erb',
+  $config_file_owner  = 'nagios',
+  $config_file_group  = 'nagios',
+  $firewall_source    = [],
+  $firewall_source_v6 = []
 ) {
 
   if $firewall {
@@ -78,13 +80,13 @@ class nsca_ng::server (
       protocol       => tcp
     }
 
-#    firewall::rule { "nsca-ng_tcp-${server}":
-#      direction       => 'output',
-#      port            => $port,
-#      protocol        => 'tcp',
-#      destination     => $server,
-#      destination_v6  => $server
-#    }
+    firewall::rule { "nsca-ng_tcp-incoming":
+      direction       => 'input',
+      port            => $port,
+      protocol        => 'tcp',
+      source          => $firewall_source,
+      source_v6       => $firewall_source_v6
+    }
   }
 
   exec { 'nsca-ng_download-pkg':
