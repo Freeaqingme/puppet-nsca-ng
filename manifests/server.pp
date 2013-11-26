@@ -50,23 +50,11 @@
 #   class where a selection is made based on OS.
 #
 class nsca_ng::server (
-  $server,
-  $password    = 'foobar',
-  $identity    = $::fqdn,
   $tls_ciphers = [ 'PSK-AES256-CBC-SHA' ],
   $port        = 5668,
-  $timeout     = 15,
-  $delay       = 0,
   $version     = 1.2,
-  $template    = 'nsca_ng/server.cfg',
   $firewall    = params_lookup( 'firewall', 'global' ),
-  $bin_file    = '/usr/sbin/send_nsca',
-  $config_file = '/etc/send_nsca.cfg'
 ) {
-
-  if $password == '' {
-    fail('Autogeneration of password not yet supported')
-  }
 
   if $firewall {
     firewall::rule { 'nsca-ng_download_pkg_fw':
