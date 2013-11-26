@@ -3,6 +3,10 @@
 authorize "<%= @identity %>" {
     password = "<%= @password %>"
 
+<% if @commands != '' %>
+    commands = { "<%= @commands.join('", "') %>" }
+<% end %>
+
 <% if @services != '' %>
     services = { "<%= @services.join('", "') %>" }
 <% end %>
