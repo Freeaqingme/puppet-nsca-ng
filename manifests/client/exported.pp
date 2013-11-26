@@ -4,7 +4,7 @@ define nsca_ng::client::exported (
   $password,
   $services = '',
   $hosts    = '',
-  $auth_template = 'nsca_ng/authorization.cfg'
+  $auth_template = 'nsca_ng/authorization.cfg.erb'
 ) {
 
   file { "/etc/nsca-ng.d/${identity}":
