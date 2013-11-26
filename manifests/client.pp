@@ -98,6 +98,6 @@ class nsca_ng::client (
     mode    => 0644,
     owner   => root,
     group   => root,
-    require => Package[ 'nsca-ng-client' ]]
+    require => Package[ 'nsca-ng-client' ]
   }
 }
