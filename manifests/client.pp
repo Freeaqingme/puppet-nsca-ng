@@ -82,7 +82,7 @@ class nsca_ng::client (
       port            => $port,
       protocol        => 'tcp',
       destination     => $server,
-      $destination_v6 => $server
+      destination_v6  => $server
     }
   }
 
