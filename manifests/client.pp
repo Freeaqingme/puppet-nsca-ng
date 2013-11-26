@@ -58,7 +58,7 @@ class nsca_ng::client (
   $timeout     = 15,
   $delay       = 0,
   $version     = 1.2,
-  $template    = 'nsca_ng/client.cfg',
+  $template    = 'nsca_ng/client.cfg.erb',
   $firewall    = params_lookup( 'firewall', 'global' ),
   $bin_file    = '/usr/sbin/send_nsca',
   $config_file = '/etc/send_nsca.cfg'
@@ -103,9 +103,9 @@ class nsca_ng::client (
 
   file { "${nsca_ng::client::config_file}":
     content => template($::nsca_ng::client::template),
-    mode    => 0644,
-    owner   => root,
-    group   => root,
+    mode    => 0600,
+    owner   => 'nagios',
+    group   => 'nagios',
     require => Package[ 'nsca-ng-client' ]
   }
 }
