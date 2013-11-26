@@ -58,7 +58,7 @@ class nsca_ng::server (
   $max_queue_size    = 1024,
   $log_level         = 3,
   $timeout           = 60,
-  $command_file      = '/var/lib/nagios3/rw/nagios.cmd',
+  $command_file      = '/var/lib/icinga/rw/icinga.cmd',
   $tls_ciphers       = [ 'PSK-AES256-CBC-SHA' ],
   $port              = 5668,
   $version           = 1.2,
@@ -114,7 +114,7 @@ class nsca_ng::server (
     require => Package['nsca-ng-server']
   }
 
-  file { "${nsca_ng::server::config_file}":
+  file { "${nsca_ng::server::config_file}.cfg":
     content => template($::nsca_ng::server::template),
     mode    => 0600,
     owner   => $config_file_owner,
@@ -126,4 +126,3 @@ class nsca_ng::server (
   Nsca_ng::Client::Exported <<| |>>
 
 }
-
