@@ -3,15 +3,15 @@
 authorize "<%= @identity %>" {
     password = "<%= @password %>"
 
-<% if @commands != '' %>
+<% if @commands != [] %>
     commands = { "<%= @commands.join('", "') %>" }
 <% end %>
 
-<% if @services != '' %>
+<% if @services != [] %>
     services = { "<%= @services.join('", "') %>" }
 <% end %>
 
-<% if @hosts != '' %>
+<% if @hosts != [] %>
     hosts = { "<%= @hosts.join('", "') %>" }
 <% end %>
 

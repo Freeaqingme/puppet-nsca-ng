@@ -2,9 +2,9 @@
 define nsca_ng::client::exported (
   $identity,
   $password,
-  $commands = '.*',
-  $services = '',
-  $hosts    = '',
+  $commands = [ '.*' ],
+  $services = [],
+  $hosts    = [],
   $auth_template = 'nsca_ng/authorization.cfg.erb'
 ) {
 
