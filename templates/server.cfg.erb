@@ -10,10 +10,10 @@ listen           = "<%= @listen -%>"
 temp_directory   = "<%= @temp_dir -%>"
 tls_ciphers      = "<%= @tls_ciphers.join(':') -%>"
 user             = "<%= @user -%>"
-log_level        = <%= @log_level -%>
-max_command_size = <%= @max_cmd_size -%>
-max_queue_size   = <%= @max_queue_size -%>
-timeout          = <%= @timeout -%>
+log_level        = <%= @log_level %>
+max_command_size = <%= @max_cmd_size %>
+max_queue_size   = <%= @max_queue_size %>
+timeout          = <%= @timeout %>
 
 <% if @chroot != '' %>
 chroot           = <%= @chroot -%>
