@@ -109,7 +109,7 @@ class nsca_ng::client (
     require => Package[ 'nsca-ng-client' ]
   }
 
-  @@nsca_ng::client::exported { $::fqdn:
+  @@nsca_ng::client::exported { "authorization-${::fqdn}":
     identity => $::fqdn,
     password => $password,
   }
