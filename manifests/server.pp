@@ -89,6 +89,11 @@ class nsca_ng::server (
     require  => Exec['nsca-ng_download-pkg']
   }
 
+  service { 'nsca-ng-server':
+    ensure  => running,
+    require => Package['nsca-ng-server']
+  }
+
 #  file { "${nsca_ng::server::config_file}":
 #    content => template($::nsca_ng::server::template),
 #    mode    => 0644,
