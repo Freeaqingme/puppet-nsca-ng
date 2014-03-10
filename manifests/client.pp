@@ -72,7 +72,6 @@ class nsca_ng::client (
     firewall::rule { 'nsca-ng_download_pkg_fw':
       direction      => 'output',
       destination    => 'www.nsca-ng.org',
-      destination_v6 => 'www.nsca-ng.org',
       port           => 80,
       protocol       => tcp
     }
@@ -82,7 +81,6 @@ class nsca_ng::client (
       port            => $port,
       protocol        => 'tcp',
       destination     => $server,
-      destination_v6  => $server
     }
   }
 

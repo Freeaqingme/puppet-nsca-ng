@@ -68,14 +68,12 @@ class nsca_ng::server (
   $config_file_owner  = 'nagios',
   $config_file_group  = 'nagios',
   $firewall_source    = [],
-  $firewall_source_v6 = []
 ) {
 
   if $firewall {
     firewall::rule { 'nsca-ng_download_pkg_fw':
       direction      => 'output',
       destination    => 'www.nsca-ng.org',
-      destination_v6 => 'www.nsca-ng.org',
       port           => 80,
       protocol       => tcp
     }
@@ -85,7 +83,6 @@ class nsca_ng::server (
       port            => $port,
       protocol        => 'tcp',
       source          => $firewall_source,
-      source_v6       => $firewall_source_v6
     }
   }
 
